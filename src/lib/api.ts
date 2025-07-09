@@ -89,33 +89,39 @@ export const fetchAdverseEvents = async (params: {
   receivedate?: string;
 }): Promise<AdverseEventsResponse> => {
   const queryParams = new URLSearchParams();
+  const searchParts: string[] = [];
   
+  // Add drug name to search if provided
   if (params.drugName) {
-    // Try different search formats that might work better
     const searchTerm = params.drugName.trim();
     if (searchTerm) {
-      // Try multiple search fields that might contain the drug name
-      queryParams.append('search', `patient.drug.medicinalproduct:${searchTerm}`);
+      searchParts.push(`patient.drug.medicinalproduct:"${searchTerm}"`);
     }
-  } else {
-    // If no drug name provided, just get recent events
-    queryParams.append('limit', '100');
   }
   
+  // Add seriousness filters to search
   if (params.seriousness?.includes('death')) {
-    queryParams.append('seriousnessdeath', '1');
+    searchParts.push('seriousnessdeath:1');
   }
   
   if (params.seriousness?.includes('hospitalization')) {
-    queryParams.append('seriousnesshospitalization', '1');
+    searchParts.push('seriousnesshospitalization:1');
   }
   
   if (params.seriousness?.includes('life-threatening')) {
-    queryParams.append('seriousnesslifethreatening', '1');
+    searchParts.push('seriousnesslifethreatening:1');
   }
   
+  // Combine search parts if any
+  if (searchParts.length > 0) {
+    queryParams.append('search', searchParts.join('+AND+'));
+  }
+  
+  // Add other query params
   if (params.limit) {
     queryParams.append('limit', params.limit.toString());
+  } else {
+    queryParams.append('limit', '100'); // default if no limit provided
   }
   
   if (params.skip) {
