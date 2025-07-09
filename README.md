@@ -17,23 +17,18 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Approach
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+I used cursor IDE to auto generate my code
+I added the spec.md file basically to architect the layout of compnents and packages and tech stack needed
+e.g
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1.  used react query (to fetch the data can cache the data )
+2.  Added fallback UI to show empty results instead of error for better UX experience
 
-## Learn More
+I basically use bottom up approach to build the dashboard and details page for the drugs, as i don't have prior knowledge about medical domain due to that i showed most of the information from the apis .
 
-To learn more about Next.js, take a look at the following resources:
+If i have more time
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. I shoud refactor the types of the payload and use mmost important inform e,g Manufacturing, Widget
+2. Widget component not showing the data, need some time to debug, maybe i need to make a extra call to get the time series data for the chart
