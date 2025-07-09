@@ -5,6 +5,9 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 
 ```bash
+git clone https://github.com/jaskaranpreets7/takehome-freed.git
+cd takehome-freed
+npm install
 npm run dev
 # or
 yarn dev
